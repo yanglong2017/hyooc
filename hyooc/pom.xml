@@ -12,6 +12,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <spring.boot.actuator>1.4.1.RELEASE</spring.boot.actuator>
+    <spring.boot.web>1.4.1.RELEASE</spring.boot.web>
+    
   </properties>
 
   <modules>
