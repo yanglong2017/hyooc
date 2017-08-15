@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+    <!-- 引入配置文件 --> 
+	<properties resource="properties/db.properties" />
+    <!-- 指定数据连接驱动jar地址 -->  
+	<context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+		
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		
+		<property name="javaFileEncoding" value="UTF-8"/>
+
+		<plugin type="org.mybatis.generator.plugins.CachePlugin">
+			<property name="cache_eviction" value="FIFO"/>
+			<property name="cache_flushInterval" value="60000"/>
+			<property name="cache_size" value="512"/>
+			<property name="cache_readOnly" value="true"/>
+		</plugin>
+		
+		<!-- POJO 生成equals 方法 -->
+		<!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/> -->
+		
+		<!-- POJO 继承序列化接口 -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+		
+		<!-- POJO 生成tostrong 方法 -->
+		<!-- <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
+		
+		<plugin type="${mapper.plugin}">
+			<property name="mappers" value="${mapper.Mapper}" />
+		</plugin>
+		
+		<!-- 注释 --> 
+		<commentGenerator>
+		    <property name="suppressAllComments" value="false"/><!-- 是否取消注释 --> 
+            <property name="suppressDate" value="true"/><!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->  
+		<jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.url}" 
+		     userId="${jdbc.user}" password="${jdbc.password}">
+		</jdbcConnection>
+
+        <!-- java bean 生成目录 -->
+		<javaModelGenerator targetPackage="com.hyooc.bean.aim"
+			targetProject="${targetJavaProject}">
+			<!--  自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter； -->
+			<property name="constructorBased" value="false"/>
+			
+            <property name="useActualColumnNames" value="true" />
+            
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="false"/>
+            
+            <!-- 是否创建一个不可变的类，如果为true， 那么MBG会创建一个没有setter方法的类，取而代之的是类似constructorBased的类 -->
+            <property name="immutable" value="false"/>
+            
+            <!--  设置是否在getter方法中，对String类型字段调用trim()方法 -->
+            <property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+
+        <!-- xml 生成目录 -->
+		<sqlMapGenerator targetPackage="mappers.aim"
+			targetProject="${targetResourcesProject}">
+			 <property name="enableSubPackages" value="false"/>
+		</sqlMapGenerator>
+
+        <!-- dao 生成目录 -->
+		<javaClientGenerator targetPackage="com.hyooc.maper.aim"
+			targetProject="${targetJavaProject}" type="XMLMAPPER">
+			 <property name="enableSubPackages" value=""/>
+             <property name="methodNameCalculator" value=""/>
+		</javaClientGenerator>
+		
+		<table tableName="aim_user"></table>
+		
+	</context>
+</generatorConfiguration>

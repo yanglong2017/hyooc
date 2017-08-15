@@ -13,13 +13,87 @@
 
   <name>hyooc-base</name>
   <url>http://maven.apache.org</url>
-
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- MyBatis Generator -->
+		<!-- Java接口和实体类 -->
+		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+		<!-- XML生成路径 -->
+		<targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
+	</properties>
   <dependencies>
-     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+        <dependency>  
+            <groupId>org.mybatis</groupId>  
+            <artifactId>mybatis</artifactId>  
+            <version>${mybatis.version}</version>  
+            <scope>provided</scope>
+        </dependency>  
+        <dependency>  
+            <groupId>mysql</groupId>  
+            <artifactId>mysql-connector-java</artifactId>  
+            <version>${mysql.version}</version>  
+            <scope>provided</scope>
+        </dependency>  
+        <!--通用Mapper -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>${mapper.version}</version>
+		</dependency>
+        <!-- Mybatis Generator -->
+        <dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>${generator.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>  
   </dependencies>
+  <build>  
+     <resources>
+		<resource>
+			<directory>${basedir}/src/main/java</directory>
+		</resource>
+		<resource>
+			<directory>${basedir}/src/main/resources</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+			<excludes>
+				<exclude>db.properties</exclude>
+				<exclude>generatorConfig.xml</exclude>
+				<!-- <exclude>log4j.properties</exclude> -->
+			</excludes>
+		</resource>
+	  </resources>
+      <plugins>  
+          <plugin>  
+              <groupId>org.mybatis.generator</groupId>  
+              <artifactId>mybatis-generator-maven-plugin</artifactId>  
+              <version>${generator.version}</version>  
+              <configuration>
+                  <configurationFile>${basedir}/src/main/resources/generatorConfig.xml</configurationFile>
+                  <verbose>true</verbose> <!-- 在控制台打印执行日志 -->
+                  <overwrite>true</overwrite> <!-- 重复生成时会覆盖之前的文件--> 
+              </configuration>  
+              <dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>tk.mybatis</groupId>
+						<artifactId>mapper</artifactId>
+						<version>${mapper.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.hyooc</groupId>
+						<artifactId>hyooc-base</artifactId>
+						<version>${project.parent.version}</version>
+					</dependency>
+				</dependencies>
+          </plugin>  
+      </plugins>  
+   </build> 
 </project>

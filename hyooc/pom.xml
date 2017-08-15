@@ -13,13 +13,29 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     
+    <generator.version>1.3.2</generator.version>
+    
+    <mybatis.version>3.4.1</mybatis.version>
+    <mapper.version>3.3.7</mapper.version>
+    <mysql.version>5.1.35</mysql.version>
+    
     <spring.boot.actuator>1.4.1.RELEASE</spring.boot.actuator>
     <spring.boot.web>1.4.1.RELEASE</spring.boot.web>
     
+    
+    
   </properties>
+  <dependencies>
+     <dependency>  
+         <groupId>log4j</groupId>  
+         <artifactId>log4j</artifactId>  
+         <version>1.2.17</version>  
+     </dependency> 
+  </dependencies>
 
   <modules>
     <module>hyooc-base</module>
     <module>hyooc-web-vip</module>
+    <module>hyooc-web-aim</module>
   </modules>
 </project>

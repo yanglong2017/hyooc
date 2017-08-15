@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyooc.maper.aim.AimUserMapper">
+  <resultMap id="BaseResultMap" type="com.hyooc.bean.aim.AimUser">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="pwd" jdbcType="CHAR" property="pwd" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="flag" jdbcType="BIT" property="flag" />
+  </resultMap>
+  <cache eviction="FIFO" flushInterval="60000" readOnly="true" size="512">
+    <!--
+      WARNING - @mbggenerated
+    -->
+  </cache>
+</mapper>
